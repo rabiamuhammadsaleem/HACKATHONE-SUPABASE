@@ -1,3 +1,24 @@
+// Supabase Setup
+const supabaseUrl = "https://rtdufppudpbfmsrhfeqg.supabase.co";
+const supabaseKey = "sb_publishable_qAckxaFawIGADwNyibT0OQ_eLGoRsEN";
+
+const { createClient } = supabase;
+const client = createClient(supabaseUrl, supabaseKey);
+
+// Loader functions
+function showLoader() {
+  const loaderOverlay = document.getElementById('loader-overlay');
+  if (loaderOverlay) {
+    loaderOverlay.style.display = 'flex';
+  }
+}
+
+function hideLoader() {
+  const loaderOverlay = document.getElementById('loader-overlay');
+  if (loaderOverlay) {
+    loaderOverlay.style.display = 'none';
+  }
+}
 // Password visibility toggle for login page
 const togglePassword1 = document.getElementById('toggleLoginPassword');
 const passwordInput1 = document.getElementById('login-password');
@@ -131,4 +152,3 @@ loginBtn && loginBtn.addEventListener('click', async () => {
     hideLoader();
   }
 });
-

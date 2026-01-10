@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Sweetalert2 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('./images/sky.jpg') center center no-repeat fixed;
+      background-size: cover;
+      overflow: fixed;
+      position: relative;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      opacity: 0.9;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+    }
+
+    .glow-input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #8f00ff;
+      border-color: #8f00ff;
+    }
+
+    .loader-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #8f00ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white">
+
+  <div class="snow"></div>
+
+  <!-- Signup Form -->
+  <div class="glass max-w-md w-full p-8 rounded-2xl" id="signupForm">
+    <h2 class="text-3xl font-bold mb-6 text-center">Create Account</h2>
+
+    <!--UserName  -->
+    <label class="block mb-4">
+      <span class="block mb-1">Username</span>
+      <input type="text" id="signup-username" name="signup-username" placeholder="Your username" autocomplete="off"
+        class="w-full p-3 rounded-lg bg-transparent border border-white glow-input placeholder-white" />
+    </label>
+
+    <!-- Email -->
+    <label class="block mb-4">
+      <span class="block mb-1">Email</span>
+      <input type="email" id="signup-email" name="signup-email" placeholder="Your email" autocomplete="off"
+        class="w-full p-3 rounded-lg bg-transparent border border-white glow-input placeholder-white" />
+    </label>
+
+    <!-- Password -->
+    <label class="block mb-6 relative">
+      <span class="block mb-1">Password</span>
+      <div class="relative">
+        <input type="password" id="signup-password" name="signup-password" placeholder="Your password"
+          autocomplete="new-password"
+          class="w-full p-3 pr-10 rounded-lg bg-transparent border border-white glow-input placeholder-white" />
+
+        <!-- Toggle Signup EyeIcon -->
+        <button type="button" id="togglesignupPassword"
+          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white text-lg">
+          <i class="fa-solid fa-eye" id="signupEyeIcon"></i>
+        </button>
+      </div>
+    </label>
+
+    <!-- Signup Button-->
+    <button id="signup-btn"
+      class="w-full bg-purple-600 hover:bg-purple-800 transition-all duration-300 py-3 rounded-xl font-semibold shadow-md">
+      Sign Up
+    </button>
+
+    <p class="mt-6 text-center text-sm">
+      Already have an account?
+      <a href="login.html" class="underline hover:text-purple-300">Login here</a>
+    </p>
+  </div>
+
+  <!-- Loader Overlay -->
+  <div class="loader-overlay" id="loader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+
+</body>
+
+<script>
+  const snowCount = 50;
+  for (let i = 0; i < snowCount; i++) {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.innerHTML = '•';
+    snowflake.style.left = `${Math.random() * 100}vw`;
+    snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+    snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+    snowflake.style.animationDelay = `${Math.random() * 5}s`;
+    document.body.appendChild(snowflake);
+  }
+</script>
+
+</html>

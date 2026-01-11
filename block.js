@@ -49,6 +49,8 @@ function renderBlocks(data, isMy) {
       <div class="blog-card text-center">
         <h5>${item.title}</h5>
         <p>${item.description.slice(0, 80)}...</p>
+         ${item.image_url ? `<img src="${item.image_url}" width="150">` : ""}
+
 
         ${
           isMy ? `
